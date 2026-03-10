@@ -1,93 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Lords War Room Beta Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lords War Room Beta Test</title>
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --panel:#151923;
+      --panel2:#1d2433;
+      --text:#f2f4fb;
+      --muted:#b7bfd1;
+      --gold:#f2bf55;
+      --gold2:#ffd77b;
+      --line:rgba(255,255,255,.08);
+    }
 
-<style>
-body{
-font-family: Arial, sans-serif;
-background:#0e0e12;
-color:white;
-text-align:center;
-padding:40px;
-}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(242,191,85,.18), transparent 30%),
+        linear-gradient(180deg,#0a0c11,#0b0d12);
+      color:var(--text);
+    }
 
-.container{
-max-width:700px;
-margin:auto;
-background:#1b1b22;
-padding:40px;
-border-radius:12px;
-}
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:32px 18px 60px;
+    }
 
-h1{
-color:#ffd54f;
-font-size:40px;
-}
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:28px;
+    }
 
-button{
-background:#ffd54f;
-border:none;
-padding:15px 25px;
-font-size:18px;
-border-radius:8px;
-cursor:pointer;
-}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
 
-button:hover{
-background:#ffca28;
-}
+    .left{
+      padding:34px;
+    }
 
-p{
-opacity:0.85;
-line-height:1.6;
-}
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(242,191,85,.12);
+      border:1px solid rgba(242,191,85,.25);
+      color:var(--gold2);
+      font-size:13px;
+      margin-bottom:18px;
+    }
 
-.small{
-opacity:0.6;
-font-size:14px;
-}
-</style>
+    h1{
+      margin:0 0 14px;
+      font-size:54px;
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
 
+    .accent{color:var(--gold2)}
+
+    .lead{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+      margin:0 0 22px;
+    }
+
+    .cta{
+      display:inline-block;
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#241903;
+      text-decoration:none;
+      padding:15px 22px;
+      font-weight:700;
+      border-radius:14px;
+      margin-top:8px;
+    }
+
+    .small{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .right{
+      min-height:100%;
+      padding:24px;
+      background:
+        linear-gradient(180deg, rgba(10,12,17,.25), rgba(10,12,17,.7)),
+        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+
+    .preview-box{
+      background:rgba(10,12,17,.72);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:18px;
+      padding:18px;
+      margin-bottom:14px;
+      backdrop-filter: blur(4px);
+    }
+
+    .preview-title{
+      color:var(--gold2);
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:10px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+    }
+
+    .slot{
+      height:52px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#31394d,#202739);
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .features{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .feature{
+      padding:22px;
+    }
+
+    .feature h3{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+
+    .feature p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .section-title{
+      margin:34px 0 14px;
+      font-size:34px;
+      letter-spacing:-.03em;
+    }
+
+    .section-text{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:760px;
+      margin-bottom:18px;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .benefit{
+      padding:22px;
+    }
+
+    .benefit ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.9;
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      margin-top:32px;
+      font-size:14px;
+    }
+
+    @media(max-width:900px){
+      .hero,.features,.benefits{
+        grid-template-columns:1fr;
+      }
+      h1{font-size:42px}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="card left">
+        <div class="badge">Closed Beta Applications</div>
+        <h1>Lords <span class="accent">War Room</span></h1>
+        <p class="lead">
+          A tactical companion for serious Lords Mobile players.
+          We are selecting 10 players for the first closed beta group.
+        </p>
+        <p class="lead">
+          Testers will receive early access, free War Pass access during testing, and the chance to help shape future features.
+        </p>
+        <a class="cta" href="PASTE_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener noreferrer">Apply for Beta</a>
+        <div class="small">We plan to select a mix of lower-might and higher-might players.</div>
+      </div>
 
-<div class="container">
+      <div class="card right">
+        <div class="preview-box">
+          <div class="preview-title">Colosseum Analysis</div>
+          <div class="row">
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+          </div>
+        </div>
 
-<h1>Lords War Room</h1>
+        <div class="preview-box">
+          <div class="preview-title">War Formations</div>
+          <p style="margin:0;color:#fff;font-weight:700;">DN • Wonder Rally • Simulator</p>
+        </div>
 
-<h2>Closed Beta Test</h2>
+        <div class="preview-box">
+          <div class="preview-title">Gear Tools</div>
+          <p style="margin:0;color:#fff;font-weight:700;">Build planning • Viewer • Optimization</p>
+        </div>
+      </div>
+    </div>
 
-<p>
-We are looking for <b>10 experienced Lords Mobile players</b>  
-to help test the upcoming <b>Lords War Room</b> strategy companion app.
-</p>
+    <h2 class="section-title">What is Lords War Room?</h2>
+    <p class="section-text">
+      Lords War Room is a strategy toolkit built to help players make better decisions in Lords Mobile. It focuses on planning, testing, and optimizing rather than guessing.
+    </p>
 
-<p>
-Selected testers will receive:
-</p>
+    <div class="features">
+      <div class="card feature">
+        <h3>Colosseum Tools</h3>
+        <p>Test enemy matchups, review suggested teams, and improve decision-making in Colosseum.</p>
+      </div>
+      <div class="card feature">
+        <h3>War Formation Planning</h3>
+        <p>Explore Darknest and Wonder Rally setups with a cleaner tactical workflow.</p>
+      </div>
+      <div class="card feature">
+        <h3>Gear & Build Support</h3>
+        <p>Track gear, compare builds, and prepare smarter setups for different scenarios.</p>
+      </div>
+    </div>
 
-<p>
-⚔ Early access to the app<br>
-⚔ Free War Pass access during testing and 6 months after launch<br>
-⚔ Direct influence on future features
-</p>
+    <h2 class="section-title">What selected testers get</h2>
+    <div class="benefits">
+      <div class="card benefit">
+        <ul>
+          <li>Early access to the app</li>
+          <li>Free War Pass access during testing</li>
+          <li>Direct impact on future features</li>
+        </ul>
+      </div>
+      <div class="card benefit">
+        <ul>
+          <li>Chance to join the first community group</li>
+          <li>Opportunity to provide real gameplay feedback</li>
+          <li>Early look at upcoming tools</li>
+        </ul>
+      </div>
+    </div>
 
-<br>
-
-<a href="https://forms.gle/MHmTfV9koBbikVUR9">
-<button>Apply for Beta</button>
-</a>
-
-<br><br>
-
-<p class="small">
-Only a limited number of testers will be selected.
-</p>
-
-</div>
-
+    <div class="footer">
+      Lords War Room — Closed Beta Test
+    </div>
+  </div>
 </body>
 </html>
